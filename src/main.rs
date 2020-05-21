@@ -97,7 +97,7 @@ fn main()->!{
             while usart.isr.read().txe().bit_is_clear(){}
             usart.tdr.write(|w|w.tdr().bits(u16::from(*byte)))
         }
-        lcd.delay.delay_ms(200u32);
+        lcd.delay.delay_ms(500u32);
         lcd.clear();
         // Start form Line 1
         lcd.line1(1);
@@ -108,7 +108,7 @@ fn main()->!{
             // Call Write Function to Send Data to LCD
             lcd.write(u8::from(*byte));
         }
-
+        lcd.clear();
     loop{
         // Start form Line 1
         lcd.line1(2u8);
@@ -137,11 +137,11 @@ fn main()->!{
         // Varibale For Temperature 
         let mut tempString = String::<U32>::from("\"Temperature\":");
         // Convert temp u8 value to String and push it to tempString Varible
-        let _ = write!(tempString, "\"{}\",", temp);
+        let _ = write!(tempString, "{},", temp);
         // Varibale For Humidity
         let mut humString = String::<U32>::from("\"Humidity\":");
         // Convert hum u8 value to String and push it to humString Varible
-        let _ = write!(humString, "\"{}\"", hum);
+        let _ = write!(humString, "{}", hum);
 
         // Clear The Display
         lcd.clear();
@@ -158,7 +158,7 @@ fn main()->!{
         }
         lcd.write(u8::from(b'*'));
         // Start From Line 1
-        lcd.line2(2u8);
+        lcd.line2(0u8);
         // Send TempString Value as byte ASCII Code 
         for byte in humString.as_bytes(){
             // Delay 100 milisecond Not Necessary
@@ -176,15 +176,15 @@ fn main()->!{
             usart.tdr.write(|w|w.tdr().bits(u16::from(*byte)))
         }
         // wait for 100 misisecond
-        lcd.delay.delay_ms(100u32);
+        lcd.delay.delay_ms(500u32);
         // Send Command to Server that we are sending Data "AT+CIPSEND=138\r\n"
         // As per documentation data Lenght as interger
-        for byte in b"AT+CIPSEND=138\r\n".iter(){
+        for byte in b"AT+CIPSEND=136\r\n".iter(){
             while usart.isr.read().txe().bit_is_clear(){}
             usart.tdr.write(|w|w.tdr().bits(u16::from(*byte)))
         }
         // wait for 200 misisecond
-        lcd.delay.delay_ms(200u32);
+        lcd.delay.delay_ms(500u32);
         // Send Command to Server that we are sending Data to Server as POST Request
         // As per documentation data Lenght as interger
         for byte in b"POST /motion HTTP/1.1\r\nHost: 192.168.1.108\r\nContent-Type: application/json\r\nContent-Length: 32\r\n\r\n{".iter(){
