@@ -1,0 +1,6 @@
+[submodule "dht_sensor_rust"]
+	path = dht_sensor_rust
+	url = https://github.com/jamil4321/dht_sensor_rust.git
+[submodule "i2c_Lcd_lib"]
+	path = i2c_Lcd_lib
+	url = https://github.com/jamil4321/i2c_lcd_lib.git
