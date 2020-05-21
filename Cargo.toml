@@ -1,0 +1,23 @@
+[package]
+name = "lcd_with_release_delay"
+version = "0.1.0"
+authors = ["jamil"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+
+[dependencies]
+cortex-m = "0.5.6"
+cortex-m-rt = "0.6.3"
+panic-itm = "0.4.0"
+i2c_Lcd_lib = {path = "i2c_Lcd_lib"}
+dht_sensor_rust = {path = "dht_sensor_rust"}
+
+[dependencies.f3]
+features = ["rt"]
+version = "0.6.1"
+
+[dependencies.heapless]
+default-features = false
+version = "0.3.7"
