@@ -97,7 +97,7 @@ fn main()->!{
             while usart.isr.read().txe().bit_is_clear(){}
             usart.tdr.write(|w|w.tdr().bits(u16::from(*byte)))
         }
-        lcd.delay.delay_ms(500u32);
+        lcd.delay.delay_ms(1000u32);
         lcd.clear();
         // Start form Line 1
         lcd.line1(1);
@@ -206,7 +206,7 @@ fn main()->!{
         }
 
         // Wait for 1500 mililsecond 
-        lcd.delay.delay_ms(500u32);
+        lcd.delay.delay_ms(1000u32);
         // Clear The Display
         lcd.clear();
     }
